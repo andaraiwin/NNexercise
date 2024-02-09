@@ -1,62 +1,44 @@
-from typing import List
+from typing import List, Any
 import math
-
-# def sigmoid(inputs: List[float]) -> float:
-#     return 1 / (1 + math.exp(find_weight(inputs)))
-#
-# def find_weight(inputs: List[float]) -> float:
-#     return sum(inputs)
-#
-# def find_error(desired: float, actual: float) -> float:
-#     return abs(desired - actual)
-#
-# def find_gradient(desired:float, actual:float,  y: float) -> float:
-#     return find_error(desired, actual) * (y * (1 - y))
-#
-# def find_newBias(learning_rate: float, error: float, y: float, x: float) -> float:
-#     return learning_rate * find_gradient()
-
 import numpy as np
 
-def sigmoid(v):
+def sigmoid(v: float) -> float:
     """
     This is sigmoid function
     """
-    s=1/(1+math.exp(-v))
-    return(s)
+    return 1/(1+math.exp(-v))
 
-def Nout(x,w):
+def Nout(x: List[Any], w: List[Any]) -> float:
     """
     Sum of input,bias * weight(i)
     x=numpy.array() array of inputs and bias
     w=numpy.array() array of input weights and bias weight
     """
-    o=sum(np.multiply(x,w))
-    return(o)
+    return sum(x @ w)
 
-def gradOut(e,y):
+def gradOut(e:float, y:float) -> float:
     """gradient of output node
     diff activation fuction is sigmoid
     y*(1-y)
         e is error of the node
     y is the output of the node"""
-    g=e*y*(1-y)
+    g = e * (y*(1-y))
     return (g)
 
-def gradH(y,sum):
+def gradH(y:float, sum) -> float:
     """gradient of hidden node
     diff activation fuction is sigmoid
     y*(1-y)
     y is the output of the node
     sum is sum of previous nodes* weight"""
-    g=y*(1-y)*sum
+    g= (y*(1-y)) * sum
     return (g)
 
 
-def deltaw(l,g,x):
+def deltaw(l: float, g: float, x: float) -> float:
     """Calculate the delta weight
     l is learning rate
     g is gradient of the node
     x is input of the node"""
-    d=-l*g*x
-    return(d)
+    d = -l*g*x
+    return (d)
