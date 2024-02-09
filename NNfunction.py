@@ -14,7 +14,7 @@ def Nout(x: List[Any], w: List[Any]) -> float:
     x=numpy.array() array of inputs and bias
     w=numpy.array() array of input weights and bias weight
     """
-    return sum(x @ w)
+    return sum(np.multiply(x, w))
 
 def gradOut(e:float, y:float) -> float:
     """gradient of output node
